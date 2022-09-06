@@ -5,7 +5,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 export class Photo {
 
     @PrimaryGeneratedColumn()
-    idPhoto: "id"
+    idPhoto: number;
 
     @Column()
     url: string

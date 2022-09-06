@@ -7,6 +7,7 @@ import { Pole } from './entities/pole.entity';
 @Module({
   imports: [ TypeOrmModule.forFeature([ Pole ]) ],
   controllers: [PoleController],
-  providers: [PoleService]
+  providers: [PoleService],
+  exports: [PoleService]
 })
 export class PoleModule {}

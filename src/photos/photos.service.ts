@@ -15,11 +15,24 @@ export class PhotosService {
 
   create(createPhotoDto: CreatePhotoDto) {
 
-    return 'This action adds a new photo';
+    return this.bookRepo.save(createPhotoDto);
   }
 
   findAll() {
-    return `This action returns all photos`;
+    return this.bookRepo.find({});
+  }
+
+  findByPole(id: number) {
+    return this.bookRepo.find({
+      where: {
+        pole: {
+          idPole: id
+        },
+      },
+      relations: {
+        pole: true,
+      }
+    });
   }
 
   findOne(id: number) {

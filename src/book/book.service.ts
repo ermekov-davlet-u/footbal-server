@@ -26,7 +26,12 @@ export class BookService{
     }
 
     findAll() {
-        return this.bookRepo.find()
+        return this.bookRepo.find({
+            relations: {
+                pole: true,
+                time: true
+            }
+        })
     }
 
     async findSimilar(book: BookDto) {

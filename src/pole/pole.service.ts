@@ -17,11 +17,20 @@ export class PoleService {
   }
 
   findAll() {
-    return this.poleRepo.find();
+    return this.poleRepo.find({
+      relations: {
+        photos: true,
+        club: true
+      }
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} pole`;
+    return this.poleRepo.findOne({
+      where: {
+        idPole: id
+      }
+    });
   }
 
   update(id: number, updatePoleDto: UpdatePoleDto) {
