@@ -34,6 +34,20 @@ export class BookService{
         })
     }
 
+    async findByPole( id: number) {
+        return this.bookRepo.find({
+            where: {
+                pole: {
+                    idPole: id
+                }
+            },
+            relations:{
+                pole: true,
+                time: true
+            }
+        })
+    }
+
     async findSimilar(book: BookDto) {
         return this.bookRepo.count({
             where: {

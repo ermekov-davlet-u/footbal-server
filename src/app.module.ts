@@ -19,6 +19,8 @@ import { Club } from './club/entities/club.entity';
 import { Pole } from './pole/entities/pole.entity';
 import { Photo } from './photos/entities/photo.entity';
 import { PoleState } from './pole_state/entities/pole_state.entity';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -31,7 +33,7 @@ import { PoleState } from './pole_state/entities/pole_state.entity';
     entities: [ Book, Time, Status, State, Club, Pole, Photo, PoleState ],
     synchronize: true,
     autoLoadEntities: true,
-  }), TimeModule, PoleModule, StatusModule, PhotosModule, TypeSportModule, ClubModule, StateModule, PoleStateModule, BookModule],
+  }), TimeModule, PoleModule, StatusModule, PhotosModule, TypeSportModule, ClubModule, StateModule, PoleStateModule, BookModule, AuthModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })

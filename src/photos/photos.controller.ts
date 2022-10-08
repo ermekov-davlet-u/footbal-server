@@ -53,17 +53,15 @@ export class PhotosController {
   }
   @Get('get/:imgpath')
   seeUploadedFile(@Param('imgpath') image, @Res() res) {
+    if(!image) return ""
     return res.sendFile(image, { root: './pole' });
   }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
+    if(id == "get") return "";
+    
     return this.photosService.findByPole(+id);
-  }
-
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePhotoDto: UpdatePhotoDto) {
-    return this.photosService.update(+id, updatePhotoDto);
   }
 
   @Delete(':id')
