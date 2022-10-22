@@ -10,18 +10,16 @@ export class AuthController {
     
     @Post('login')
     async login(@Body('password') password: string,
-    @Body('username') username: string,) {
+    @Body('userName') username: string) {
         return this.authService.login(username,password);
     }
 
     @Post('register')
     async register(@Body('userName') username: string,@Body('password') password: string) {
         const user = await this.authService.validatorUser(username,password);
-        console.log(username);
         if (user) {
             return 
         }
-        
         return this.authService.createUser(username,password);
     }
 
