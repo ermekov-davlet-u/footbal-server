@@ -3,33 +3,45 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { getConnection, createQueryBuilder, Repository } from "typeorm";
 import { BookDto } from "./dto/create.dto";
 import { Book } from "./entities/book.entities";
+import { UsersService } from './../users/users.service';
 
 
 
 @Injectable()
 export class BookService{
-
-
+    userService: UsersService;
     constructor(
         @InjectRepository(Book)
-        private readonly bookRepo: Repository<Book>
-    ){}
+        private readonly bookRepo: Repository<Book>,
+        userService: UsersService
+    ){
+        this.userService = userService
+    }
 
     async createNew( book: BookDto){
         const hasBook = await this.findSimilar(book)
-        console.log(hasBook);
-        
+        const userid = await this.userService.findOne(book.userName)
         if(!hasBook){
-            return this.bookRepo.save(book);
+            return this.bookRepo.save({
+                ...book,
+                user: userid
+            });
         }
         return "Поле занята"
     }
 
     findAll() {
         return this.bookRepo.find({
+            select: {
+                user: {
+                    userName: true,
+                    id: true,
+                    }
+            },
             relations: {
                 pole: true,
-                time: true
+                time: true,
+                user: true
             }
         })
     }
@@ -41,9 +53,17 @@ export class BookService{
                     idPole: id
                 }
             },
+            select:{
+                user: {
+                    userName: true,
+                    id: true,
+                }
+            }
+            ,
             relations:{
                 pole: true,
-                time: true
+                time: true,
+                user: true
             }
         })
     }
@@ -64,6 +84,10 @@ export class BookService{
                 time: true
             }
         })
+    }
+
+    async deleteBook(id: number){
+        return this.bookRepo.delete(id)
     }
     
 

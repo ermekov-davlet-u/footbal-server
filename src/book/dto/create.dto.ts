@@ -5,5 +5,6 @@ export interface BookDto {
     done: boolean
     time: Time
     pole: Pole
-    dateBook: Date
+    dateBook: Date;
+    userName: string;
 }

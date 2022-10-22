@@ -14,7 +14,7 @@ import { LocalStrategy } from './local.strategy';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: 0 },
+      signOptions: {expiresIn: '60000000s'}
     }),
   ],
   controllers: [AuthController],

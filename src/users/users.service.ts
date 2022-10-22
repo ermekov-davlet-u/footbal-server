@@ -19,11 +19,16 @@ export class UsersService {
         where: { userName: username }
     });
   }
-  async createUser(body: IUser): Promise<User> {
 
+  async findOneById(userId: number): Promise<User | undefined> {
+    return this.userRepo.findOneBy({
+      id: userId
+    });
+  }
+  async createUser(body: IUser): Promise<User> {
     return this.userRepo.save({
-        userName: body.userName,
-        password: body.password,
+      userName: body.userName,
+      password: body.password,
     });
 }
 

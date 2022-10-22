@@ -1,6 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Book } from "src/book/entities/book.entities";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-
+export enum UserRole{
+    ADMIN = "admin",
+    USER = "user",
+}
 @Entity("user")
 export class User{
     @PrimaryGeneratedColumn()
@@ -13,4 +17,15 @@ export class User{
 
     @Column()
     password:string;
+
+    @Column({
+        default: "admin",
+        enum: UserRole,
+        type: 'enum'
+    })
+    isRole: UserRole
+
+    @OneToMany(() => Book, book => book.user)
+    book: Book[]
+
 }

@@ -1,5 +1,6 @@
 import { Pole } from "src/pole/entities/pole.entity";
 import { Time } from "src/time/entities/time.entity";
+import { User } from "src/users/user.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
@@ -24,4 +25,8 @@ export class Book{
         type: "date",
     })
     dateBook: Date
+
+    @ManyToOne( () => User, user => user.book )
+    @JoinColumn()
+    user: User
 }

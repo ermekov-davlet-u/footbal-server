@@ -14,16 +14,20 @@ export class AuthService {
   async createUser(
     username: string,
     password: string,
-): Promise<IUser> {
-    const saltOrRounds = 10;
-    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-    const result = await this.usersService.createUser(
-        {   
-            userName: username,
-            password: hashedPassword
-        }
-    );
+): Promise<IUser | null> {
+    try {
+      const saltOrRounds = 10;
+      const hashedPassword = await bcrypt.hash(password, saltOrRounds);
+      const result = await this.usersService.createUser(
+          {   
+              userName: username,
+              password: hashedPassword
+          }
+      );
     return result;
+    } catch (error) {
+      return null
+    }
 }
 
 async validatorUser(username: string, pass: string): Promise<any> {
@@ -37,15 +41,17 @@ async validatorUser(username: string, pass: string): Promise<any> {
 
   async login(username: string, password: string) {
     const user = await this.usersService.findOne(username)
-    console.log(user);
     if(!user) {
       return null;
     }
 
     const confirm = await bcrypt.compare(password, user.password)
-    console.log(confirm);
-    
+    if(!confirm){
+      return null;
+    }
     return {
+      id: user.id,
+      username: username,
       access_token: this.jwtService.sign(
         {
           payload: username

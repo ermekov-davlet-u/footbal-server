@@ -4,6 +4,8 @@ import { CreateTimeDto } from './dto/create-time.dto';
 import { UpdateTimeDto } from './dto/update-time.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { Roles } from 'src/auth/roles.decorator';
+import { UserRole } from 'src/users/user.entity';
 
 @Controller('time')
 export class TimeController {
@@ -15,16 +17,14 @@ export class TimeController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Roles(UserRole.USER)
   @Get()
   findAll() {
-    
     return this.timeService.findAll();
   }
   @UseGuards(JwtAuthGuard)
   @Get(':id')
   findOne(@Param('id') id: string) {
-    console.log("test");
-    
     return this.timeService.findOne(+id);
   }
 

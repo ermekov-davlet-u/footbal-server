@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post } from "@nestjs/common";
 import { BookService } from "./book.service";
 import { BookDto } from "./dto/create.dto";
 
@@ -15,7 +15,7 @@ export class BookController{
         return this.bookService.createNew(body)
     }
 
-    @Get( ":id" )
+    @Get(":id" )
     getBookByPole(@Param("id") id : number){
         return this.bookService.findByPole(id);
     }
@@ -23,6 +23,11 @@ export class BookController{
     @Get()
     getAllBook(){
         return this.bookService.findAll();
+    }
+
+    @Delete(":id")
+    deleteAllBook(@Param("id") id: number){
+        return this.bookService.deleteBook(id);
     }
 
 }
