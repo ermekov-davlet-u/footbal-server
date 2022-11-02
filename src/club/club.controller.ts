@@ -1,7 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, HttpStatus, UploadedFiles } from '@nestjs/common';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { ClubService } from './club.service';
 import { CreateClubDto } from './dto/create-club.dto';
 import { UpdateClubDto } from './dto/update-club.dto';
+import { extname } from 'path';
+import { diskStorage } from 'multer';
 
 @Controller('club')
 export class ClubController {
@@ -11,6 +14,8 @@ export class ClubController {
   create(@Body() createClubDto: CreateClubDto) {
     return this.clubService.create(createClubDto);
   }
+
+  
 
   @Get()
   findAll() {

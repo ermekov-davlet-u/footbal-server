@@ -1,3 +1,4 @@
+import { ClubPhoto } from "src/club-photo/entities/club-photo.entity";
 import { Pole } from "src/pole/entities/pole.entity";
 import { TypeSport } from "src/type-sport/entities/type-sport.entity";
 import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
@@ -34,5 +35,10 @@ export class Club {
 
     @ManyToOne(() => TypeSport, typeSport => typeSport.club)
     typeSport: TypeSport
+
+    @OneToMany(() => ClubPhoto, clubPhoto => clubPhoto.club)
+    photos: ClubPhoto[]
+
+    
 
 }

@@ -21,6 +21,8 @@ import { Photo } from './photos/entities/photo.entity';
 import { PoleState } from './pole_state/entities/pole_state.entity';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { ClubPhotoModule } from './club-photo/club-photo.module';
+import { ClubPhoto } from './club-photo/entities/club-photo.entity';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -30,10 +32,10 @@ import { UsersModule } from './users/users.module';
     username: 'postgres',
     password: 'postgres',
     database: 'football',
-    entities: [ Book, Time, Status, State, Club, Pole, Photo, PoleState ],
+    entities: [ Book, Time, Status, State, Club, Pole, Photo, PoleState, ClubPhoto ],
     synchronize: true,
     autoLoadEntities: true,
-  }), TimeModule, PoleModule, StatusModule, PhotosModule, TypeSportModule, ClubModule, StateModule, PoleStateModule, BookModule, AuthModule, UsersModule],
+  }), TimeModule, PoleModule, StatusModule, PhotosModule, TypeSportModule, ClubModule, StateModule, PoleStateModule, BookModule, AuthModule, UsersModule, ClubPhotoModule],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,7 +1,8 @@
 # compiled output
 /dist
 /node_modules
-
+/club
+/pole
 # Logs
 logs
 *.log

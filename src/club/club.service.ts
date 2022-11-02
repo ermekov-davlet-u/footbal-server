@@ -18,11 +18,19 @@ export class ClubService {
   }
 
   findAll() {
-    return this.clubRepo.find();
+    return this.clubRepo.find({
+      relations: {
+        photos: true
+      }
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} club`;
+    return this.clubRepo.findOne({
+      where: {
+        idClub: id
+      }
+    });
   }
 
   update(id: number, updateClubDto: UpdateClubDto) {

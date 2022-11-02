@@ -36,9 +36,7 @@ export class PhotosController {
     }),
   }))
   async uploadFile(@UploadedFile() file: Express.Multer.File, @Query("b") b: number) {
-
     const pole = await this.poleService.findOne(b)
-
     const createPhotoDto: CreatePhotoDto = {
       url: file.filename,
       desc: "",
