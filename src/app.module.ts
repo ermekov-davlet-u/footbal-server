@@ -23,6 +23,10 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ClubPhotoModule } from './club-photo/club-photo.module';
 import { ClubPhoto } from './club-photo/entities/club-photo.entity';
+import { GuestModule } from './guest/guest.module';
+import { BandModule } from './band/band.module';
+import { GameResolver } from './game/game.resolver';
+import { GameModule } from './game/game.module';
 
 @Module({
   imports: [TypeOrmModule.forRoot({
@@ -35,8 +39,8 @@ import { ClubPhoto } from './club-photo/entities/club-photo.entity';
     entities: [ Book, Time, Status, State, Club, Pole, Photo, PoleState, ClubPhoto ],
     synchronize: true,
     autoLoadEntities: true,
-  }), TimeModule, PoleModule, StatusModule, PhotosModule, TypeSportModule, ClubModule, StateModule, PoleStateModule, BookModule, AuthModule, UsersModule, ClubPhotoModule],
+  }), TimeModule, PoleModule, StatusModule, PhotosModule, TypeSportModule, ClubModule, StateModule, PoleStateModule, BookModule, AuthModule, UsersModule, ClubPhotoModule, GuestModule, BandModule, GameModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, GameResolver],
 })
 export class AppModule {}
